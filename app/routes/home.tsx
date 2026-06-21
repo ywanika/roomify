@@ -34,12 +34,12 @@ export default function Home() {
             return false;
         }
 
-        setProjects((prev) => [newItem, ...prev])
+        setProjects((prev) => [saved, ...prev])
 
         navigate(`/visualizer/${newId}`, {
             state:{
-                initialImage: saved.sourceImage,
-                initialRendered: saved.renderedImage || null,
+                initialImage: saved.sourcePath || saved.sourceImage,
+                initialRender: saved.renderedPath || saved.renderedImage || null,
                 name
             }
         });
@@ -96,7 +96,7 @@ export default function Home() {
                   <div className="projects-grid">
 
                       {projects.map(({id, name, renderedImage, sourceImage, timestamp}) => (
-                          <div className="project-card group">
+                          <div key={id} className="project-card group">
                               <div className="preview">
                                   <img src={renderedImage || sourceImage}
                                        alt="Project"/>
@@ -105,7 +105,7 @@ export default function Home() {
                                   </div>
                               </div>
 
-                              < div className="card-body">
+                              <div className="card-body">
                                   <div>
                                       <h3>{name}</h3>
                                       <div className="meta">
