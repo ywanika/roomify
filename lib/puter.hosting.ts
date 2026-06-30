@@ -33,10 +33,7 @@ StoreHostedImageParams): Promise<HostedAsset | null> => {
     if(isHostedUrl(url)) return {url};
 
     try{
-        const resolved = label === "rendered"
-            ? await imageUrlToPngBlob(url)
-                .then((blob) => blob ? {blob, contentType: "image/png"} : null)
-            : await fetchBlobFromUrl(url);
+        const resolved = await fetchBlobFromUrl(url);
 
         if(!resolved) return null;
 
