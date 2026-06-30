@@ -19,9 +19,9 @@ export const fetchAsDataUrl = async (url: string): Promise<string> => {
 };
 
 export const generate3DView = async ({ sourceImage }: Generate3DViewParams) => {
-    const dataUrl = await fetchAsDataUrl(sourceImage.startsWith("data:")
+    const dataUrl = sourceImage.startsWith("data:")
         ? sourceImage
-        : await fetchAsDataUrl(sourceImage));
+        : await fetchAsDataUrl(sourceImage);
     const base64Data = dataUrl.split(",")[1];
     const mimeType = dataUrl.split(';')[0].split(':')[1];
 
